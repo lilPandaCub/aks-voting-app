@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: aksvotingapp 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aksvotingapp
+  template:
+    metadata:
+      labels:
+        app: aksvotingapp 
+    spec:
+      containers:
+        - name: aksvotingapp 
+          image: enveik8scr.azurecr.io/aksvotingapp
+          ports:
+          - containerPort: 8080
