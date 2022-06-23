@@ -1,0 +1,120 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    azure-pipelines/jobName: '"Deploy"'
+    azure-pipelines/org: https://dev.azure.com/envy0780/
+    azure-pipelines/pipeline: '"lilPandaCub.aks-voting-app"'
+    azure-pipelines/pipelineId: '"5"'
+    azure-pipelines/project: AKS-VOTING-APP
+    azure-pipelines/run: "20220623.2"
+    azure-pipelines/runuri: https://dev.azure.com/envy0780/AKS-VOTING-APP/_build/results?buildId=10
+  creationTimestamp: "2022-06-23T12:54:33Z"
+  generateName: aksvotingapp-6d884c9cc7-
+  labels:
+    app: aksvotingapp
+    pod-template-hash: 6d884c9cc7
+  name: aksvotingapp-6d884c9cc7-9bz2s
+  namespace: aks-voting-app
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: aksvotingapp-6d884c9cc7
+    uid: e83d6cde-8d92-404f-99d6-7885371b5260
+  resourceVersion: "81308"
+  uid: 7c88318e-8a52-4b4f-bdcd-0bec57b1bb3d
+spec:
+  containers:
+  - image: enveik8scr.azurecr.io/aksvotingapp:10
+    imagePullPolicy: IfNotPresent
+    name: aksvotingapp
+    ports:
+    - containerPort: 3000
+      protocol: TCP
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-vsg8j
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  imagePullSecrets:
+  - name: enveik8scrb349-auth
+  nodeName: aks-agentpool-25140703-vmss000002
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-vsg8j
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2022-06-23T12:54:33Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2022-06-23T12:54:36Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2022-06-23T12:54:36Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2022-06-23T12:54:33Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://918cfe07fe57aef36a2f0cdc7fecee4872d802dfe6e74ef72d118ccb6045285e
+    image: enveik8scr.azurecr.io/aksvotingapp:10
+    imageID: enveik8scr.azurecr.io/aksvotingapp@sha256:8b9c8041af8c43a81d60dcdc14e1ba73a38f78f587457cd76782888cd4210a68
+    lastState: {}
+    name: aksvotingapp
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2022-06-23T12:54:36Z"
+  hostIP: 10.240.0.226
+  phase: Running
+  podIP: 10.240.1.60
+  podIPs:
+  - ip: 10.240.1.60
+  qosClass: BestEffort
+  startTime: "2022-06-23T12:54:33Z"
